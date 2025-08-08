@@ -54,6 +54,7 @@ const Header = () => {
     { name: 'Shop', href: '/shop' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Admin', href: '/admin' },
   ]
 
   return (

@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '@/store/useStore'
-import AdminSidebar from '@/components/admin/AdminSidebar'
 import ProductsManager from '@/components/admin/ProductsManager'
 import OrdersManager from '@/components/admin/OrdersManager'
 import AnalyticsDashboard from '@/components/admin/AnalyticsDashboard'

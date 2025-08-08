@@ -203,6 +203,46 @@ export const useStore = create(
       // Notifications
       notifications: [],
       
+      // Mock data for admin
+      orders: [
+        {
+          id: 'ORD-1001',
+          customerName: 'Sarah Johnson',
+          customerEmail: 'sarah@example.com',
+          total: 149.99,
+          status: 'pending',
+          date: new Date('2024-01-08'),
+          items: [
+            { name: 'Handcrafted Ceramic Vase', quantity: 1, price: 89.99 },
+            { name: 'Vanilla Scented Candle', quantity: 2, price: 30.00 }
+          ],
+          shippingAddress: '123 Main St, New York, NY 10001'
+        }
+      ],
+      
+      customers: [
+        {
+          id: 1,
+          name: 'Sarah Johnson',
+          email: 'sarah@example.com',
+          phone: '+1 (555) 123-4567',
+          address: '123 Main St, New York, NY 10001',
+          joinDate: new Date('2023-06-15'),
+          totalOrders: 8,
+          totalSpent: 1249.99,
+          lastOrder: new Date('2024-01-08'),
+          status: 'active',
+          wishlistItems: 5
+        }
+      ],
+      
+      analytics: {
+        totalRevenue: 15420.50,
+        totalOrders: 156,
+        totalCustomers: 89,
+        conversionRate: 3.2
+      },
+      
       // Actions
       addToCart: (product, quantity = 1) => {
         const { cart } = get()
@@ -430,6 +470,53 @@ export const useStore = create(
       deleteProduct: (productId) => {
         set({
           products: get().products.filter(product => product.id !== productId)
+        })
+      },
+      
+      // Order Management
+      updateOrderStatus: (orderId, status) => {
+        set({
+          orders: get().orders.map(order =>
+            order.id === orderId
+              ? { ...order, status }
+              : order
+          )
+        })
+      },
+      
+      addOrder: (order) => {
+        const newOrder = {
+          ...order,
+          id: `ORD-${Date.now()}`,
+          date: new Date()
+        }
+        set({
+          orders: [...get().orders, newOrder]
+        })
+      },
+      
+      // Customer Management
+      addCustomer: (customer) => {
+        const newCustomer = {
+          ...customer,
+          id: Date.now(),
+          joinDate: new Date(),
+          totalOrders: 0,
+          totalSpent: 0,
+          status: 'active'
+        }
+        set({
+          customers: [...get().customers, newCustomer]
+        })
+      },
+      
+      updateCustomer: (customerId, updates) => {
+        set({
+          customers: get().customers.map(customer =>
+            customer.id === customerId
+              ? { ...customer, ...updates }
+              : customer
+          )
         })
       },
       
