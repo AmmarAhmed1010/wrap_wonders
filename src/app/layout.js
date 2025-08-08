@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import CartSidebar from '@/components/CartSidebar'
 import NotificationSystem from '@/components/NotificationSystem'
 import { Toaster } from 'react-hot-toast'
+import ReduxProvider from '@/components/ReduxProvider'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -48,32 +49,40 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} ${dancing.variable}`}>
       <body className="font-sans bg-gradient-to-br from-white via-accent-teal-50/30 to-accent-yellow-50/30 antialiased">
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
-        <CartSidebar />
-        <NotificationSystem />
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: '#fff',
-              color: '#374151',
-              boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-              borderRadius: '12px',
-              border: '1px solid #f3f4f6',
-            },
-            success: {
-              iconTheme: {
-                primary: '#CF4369',
-                secondary: '#fff',
+        <ReduxProvider>
+          <Header />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+          <CartSidebar />
+          <NotificationSystem />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: '#fff',
+                color: '#374151',
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                borderRadius: '12px',
+                border: '1px solid #f3f4f6',
               },
-            },
-          }}
-        />
+              success: {
+                iconTheme: {
+                  primary: '#10b981',
+                  secondary: '#fff',
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: '#ef4444',
+                  secondary: '#fff',
+                },
+              },
+            }}
+          />
+        </ReduxProvider>
       </body>
     </html>
   )

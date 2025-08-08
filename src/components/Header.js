@@ -3,7 +3,11 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { useStore } from '@/store/useStore'
+import { useDispatch } from 'react-redux'
+import { useCart, useWishlist, useUI, useProducts } from '@/store/hooks'
+import { toggleCart } from '@/store/slices/cartSlice'
+import { toggleMobileMenu, closeMobileMenu } from '@/store/slices/uiSlice'
+import { setSearchQuery } from '@/store/slices/productsSlice'
 import { 
   MagnifyingGlassIcon,
   ShoppingBagIcon,
@@ -19,18 +23,10 @@ const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   
-  const { 
-    cartOpen, 
-    toggleCart, 
-    getCartItemsCount, 
-    mobileMenuOpen, 
-    toggleMobileMenu, 
-    closeMobileMenu,
-    wishlist,
-    setSearchQuery: setStoreSearchQuery
-  } = useStore()
-
-  const cartItemsCount = getCartItemsCount()
+  const dispatch = useDispatch()
+  const { cartItemsCount } = useCart()
+  const { wishlistCount } = useWishlist()
+  const { mobileMenuOpen } = useUI()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +39,7 @@ const Header = () => {
   const handleSearch = (e) => {
     e.preventDefault()
     if (searchQuery.trim()) {
-      setStoreSearchQuery(searchQuery)
+      dispatch(setSearchQuery(searchQuery))
       setSearchOpen(false)
       window.location.href = '/shop'
     }
@@ -178,19 +174,19 @@ const Header = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {wishlist.length > 0 ? (
+                  {wishlistCount > 0 ? (
                     <HeartSolidIcon className="h-6 w-6 text-primary-coral" />
                   ) : (
                     <HeartIcon className="h-6 w-6" />
                   )}
-                  {wishlist.length > 0 && (
+                  {wishlistCount > 0 && (
                     <motion.span
                       className="absolute -top-1 -right-1 bg-primary-coral text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     >
-                      {wishlist.length}
+                      {wishlistCount}
                     </motion.span>
                   )}
                 </motion.button>
@@ -198,7 +194,7 @@ const Header = () => {
 
               {/* Cart Icon */}
               <motion.button
-                onClick={toggleCart}
+                onClick={() => dispatch(toggleCart())}
                 className="relative p-2 text-gray-700 hover:text-primary-coral transition-colors group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -218,7 +214,7 @@ const Header = () => {
 
               {/* Mobile Menu Button */}
               <motion.button
-                onClick={toggleMobileMenu}
+                onClick={() => dispatch(toggleMobileMenu())}
                 className="lg:hidden p-2 transition-colors"
                 style={{ color: 'var(--text-color)' }}
                 onMouseEnter={(e) => e.target.style.color = 'var(--primary-coral)'}
@@ -305,7 +301,7 @@ const Header = () => {
                     <Link
                       key={item.name}
                       href={item.href}
-                      onClick={closeMobileMenu}
+                      onClick={() => dispatch(closeMobileMenu())}
                       className="block px-4 py-3 text-lg font-medium rounded-lg transition-colors"
                       style={{ color: 'var(--text-color)' }}
                       onMouseEnter={(e) => {

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useStore } from '@/store/useStore'
+import { useProducts, useOrders, useCustomers } from '@/store/hooks'
 import ProductsManager from '@/components/admin/ProductsManager'
 import OrdersManager from '@/components/admin/OrdersManager'
 import AnalyticsDashboard from '@/components/admin/AnalyticsDashboard'
@@ -18,7 +18,9 @@ import {
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('analytics')
-  const { products, orders, customers } = useStore()
+  const { products } = useProducts()
+  const { orders } = useOrders()
+  const { customers } = useCustomers()
 
   const tabs = [
     {
