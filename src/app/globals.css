@@ -1,8 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Colors */
+  --primary-coral: #CF4369;
+  --primary-teal: #7FB2B0;
+  --primary-yellow: #EBC558;
+  --primary-orange: #E96D5E;
+  
+  /* Brand Color Variations */
+  --brand-50: #fef7f7;
+  --brand-100: #fdedef;
+  --brand-200: #fbd9dc;
+  --brand-300: #f7b8c0;
+  --brand-400: #f18ba0;
+  --brand-500: #CF4369;
+  --brand-600: #b83a5a;
+  --brand-700: #9b2f4a;
+  --brand-800: #822a42;
+  --brand-900: #70273e;
+  
+  /* Accent Colors */
+  --accent-teal-50: #f0fdfc;
+  --accent-teal-100: #ccfbf1;
+  --accent-teal-200: #99f6e4;
+  --accent-teal-300: #5eead4;
+  --accent-teal-400: #2dd4bf;
+  --accent-teal-500: #7FB2B0;
+  --accent-teal-600: #0d9488;
+  --accent-teal-700: #0f766e;
+  --accent-teal-800: #115e59;
+  --accent-teal-900: #134e4a;
+  
+  --accent-yellow-50: #fefce8;
+  --accent-yellow-100: #fef9c3;
+  --accent-yellow-200: #fef08a;
+  --accent-yellow-300: #fde047;
+  --accent-yellow-400: #EBC558;
+  --accent-yellow-500: #eab308;
+  --accent-yellow-600: #ca8a04;
+  --accent-yellow-700: #a16207;
+  --accent-yellow-800: #854d0e;
+  --accent-yellow-900: #713f12;
+  
+  --accent-orange-50: #fff7ed;
+  --accent-orange-100: #ffedd5;
+  --accent-orange-200: #fed7aa;
+  --accent-orange-300: #fdba74;
+  --accent-orange-400: #E96D5E;
+  --accent-orange-500: #f97316;
+  --accent-orange-600: #ea580c;
+  --accent-orange-700: #c2410c;
+  --accent-orange-800: #9a3412;
+  --accent-orange-900: #7c2d12;
+  
+  /* Background & Foreground */
+  --background: linear-gradient(135deg, #fef7f7 0%, #f0fdfc 50%, #fefce8 100%);
+  --foreground: #1f2937;
+  --background-secondary: rgba(255, 255, 255, 0.9);
+  
+  /* Shadows */
+  --shadow-soft: 0 4px 6px -1px rgba(207, 67, 105, 0.1), 0 2px 4px -1px rgba(207, 67, 105, 0.06);
+  --shadow-medium: 0 10px 15px -3px rgba(207, 67, 105, 0.1), 0 4px 6px -2px rgba(207, 67, 105, 0.05);
+  --shadow-strong: 0 20px 25px -5px rgba(207, 67, 105, 0.1), 0 10px 10px -5px rgba(207, 67, 105, 0.04);
+  --shadow-glow: 0 0 20px rgba(235, 197, 88, 0.3);
 }
 
 @theme inline {
@@ -12,15 +72,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', 'Playfair Display', sans-serif;
 }
